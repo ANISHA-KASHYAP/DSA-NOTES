@@ -1,0 +1,89 @@
+
+Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
+BRUTEFORCE -
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+
+        int count0 = 0, count1 = 0, count2 = 0;
+
+        // Count frequency of 0, 1 and 2
+        for(int i = 0; i < nums.size(); i++) {
+            if(nums[i] == 0) count0++;
+            else if(nums[i] == 1) count1++;
+            else count2++;
+        }
+
+        int index = 0;
+
+        // Fill 0s
+        while(count0--) {
+            nums[index++] = 0;
+        }
+
+        // Fill 1s
+        while(count1--) {
+            nums[index++] = 1;
+        }
+
+        // Fill 2s
+        while(count2--) {
+            nums[index++] = 2;
+        }
+    }
+};
+
+
+
+OPTIMAL-
+
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+
+        // low = 0s ke liye position
+        // mid = current element check karega
+        // high = 2s ke liye position
+        int low = 0, mid = 0, high = nums.size() - 1;
+
+
+        // Jab tak mid high ke andar hai tab tak check karo
+        while(mid <= high) {
+
+
+            // Agar current element 0 hai
+            if(nums[mid] == 0) {
+
+                // 0 ko left side bhej do
+                swap(nums[low], nums[mid]);
+
+                // low aur mid dono aage badhenge
+                low++;
+                mid++;
+            }
+
+
+            // Agar current element 1 hai
+            else if(nums[mid] == 1) {
+
+                // 1 already middle me hai, bas aage badho
+                mid++;
+            }
+
+
+            // Agar current element 2 hai
+            else {
+
+                // 2 ko right side bhej do
+                swap(nums[mid], nums[high]);
+
+                // high ko peeche le jao
+                high--;
+
+                // mid ko increase nahi karenge
+                // kyunki naye element ko dobara check karna hai
+            }
+        }
+    }
+};
