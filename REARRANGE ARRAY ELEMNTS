@@ -1,0 +1,44 @@
+OPTIMAL-
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+
+        // Answer array jisme final rearranged elements store honge
+        vector<int> ans(nums.size());
+
+        // Positive numbers ke liye index (0,2,4...)
+        int posIndex = 0;
+
+        // Negative numbers ke liye index (1,3,5...)
+        int negIndex = 1;
+
+
+        // Puri array traverse karenge
+        for(int i = 0; i < nums.size(); i++) {
+
+            // Agar number positive hai
+            if(nums[i] > 0) {
+
+                // Positive number ko even index pe place karo
+                ans[posIndex] = nums[i];
+
+                // Next positive position pe move karo
+                posIndex += 2;
+            }
+
+            // Agar number negative hai
+            else {
+
+                // Negative number ko odd index pe place karo
+                ans[negIndex] = nums[i];
+
+                // Next negative position pe move karo
+                negIndex += 2;
+            }
+        }
+
+
+        // Rearranged array return karo
+        return ans;
+    }
+};
