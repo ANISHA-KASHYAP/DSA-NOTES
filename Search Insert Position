@@ -1,0 +1,36 @@
+Search Insert Position
+
+
+10
+
+Problem Statement: You are given a sorted array arr of distinct values and a target value x. You need to search for the index of the target value in the array.
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+
+        int low = 0;
+        int high = nums.size() - 1;
+
+
+        while(low <= high){
+
+            int mid = low + (high - low) / 2;
+
+
+            if(nums[mid] == target)
+                return mid;
+
+
+            else if(nums[mid] < target)
+                low = mid + 1;
+
+
+            else
+                high = mid - 1;
+
+        }
+
+
+        return low;
+    }
+};
