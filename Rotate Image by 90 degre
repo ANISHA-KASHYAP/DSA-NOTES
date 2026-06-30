@@ -1,0 +1,58 @@
+Rotate Image by 90 degree
+
+Problem Statement: Given an N * N 2D integer matrix, rotate the matrix by 90 degrees clockwise. The rotation must be done in place, meaning the input 2D matrix must be modified directly..
+bruteforce-
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+
+        int n = matrix.size();
+
+        vector<vector<int>> ans(n, vector<int>(n));
+
+
+        // Put elements in rotated position
+        for(int i = 0; i < n; i++){
+
+            for(int j = 0; j < n; j++){
+
+                ans[j][n-1-i] = matrix[i][j];
+
+            }
+        }
+
+
+        // Copy back to original matrix
+        matrix = ans;
+    }
+};
+
+
+
+
+optimal-
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+
+        int n = matrix.size();
+
+        // Step 1: Transpose
+        for(int i = 0; i < n; i++){
+
+            for(int j = i; j < n; j++){
+
+                swap(matrix[i][j], matrix[j][i]);
+
+            }
+        }
+
+
+        // Step 2: Reverse each row
+        for(int i = 0; i < n; i++){
+
+            reverse(matrix[i].begin(), matrix[i].end());
+
+        }
+    }
+};
