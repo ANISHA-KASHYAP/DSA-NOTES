@@ -1,0 +1,62 @@
+BRUTEFORCE-
+class Solution {
+public:
+    string removeOuterParentheses(string s) {
+
+        string ans = "";
+        int balance = 0;
+        int start = 0;   // Start index of current primitive
+
+        for(int i = 0; i < s.size(); i++) {
+
+            if(s[i] == '(')
+                balance++;
+            else
+                balance--;
+
+            // Primitive ends here
+            if(balance == 0) {
+
+                // Copy everything except first and last bracket
+                for(int j = start + 1; j < i; j++) {
+                    ans += s[j];
+                }
+
+                // Next primitive starts from i + 1
+                start = i + 1;
+            }
+        }
+
+        return ans;
+    }
+};
+OPTIMAL-class Solution {
+public:
+    string removeOuterParentheses(string s) {
+
+        string ans = "";
+        int depth = 0;
+
+        for(char ch : s) {
+
+            if(ch == '(') {
+
+                // Ignore the outermost opening bracket
+                if(depth > 0)
+                    ans += ch;
+
+                depth++;
+            }
+            else {
+
+                depth--;
+
+                // Ignore the outermost closing bracket
+                if(depth > 0)
+                    ans += ch;
+            }
+        }
+
+        return ans;
+    }
+};
