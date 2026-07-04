@@ -1,0 +1,72 @@
+Reverse words in a given string / Palindrome Check
+Bruteforce-
+class Solution {
+public:
+    string reverseWords(string s) {
+
+        vector<string> words;
+        string word, ans;
+
+        for(char ch : s) {
+            if(ch != ' ')
+                word += ch;
+            else if(!word.empty()) {
+                words.push_back(word);
+                word = "";
+            }
+        }
+
+        if(!word.empty())
+            words.push_back(word);
+
+        for(int i = words.size() - 1; i >= 0; i--) {class Solution {
+public:
+    string reverseWords(string s) {
+
+        string ans = "";
+        int i = s.size() - 1;   // Start from the end of the string
+
+        while(i >= 0) {
+
+            // Skip all extra spaces
+            while(i >= 0 && s[i] == ' ')
+                i--;
+
+            // If no characters are left, stop
+            if(i < 0)
+                break;
+
+            int j = i;
+
+            // Move j to the beginning of the current word
+            while(j >= 0 && s[j] != ' ')
+                j--;
+
+            // Add the current word to the answer
+            ans += s.substr(j + 1, i - j);
+
+            // If more words are left, add one space
+            if(j > 0)
+                ans += " ";
+
+            // Move i before the current word
+            i = j - 1;
+        }
+
+        // Remove trailing space (if added)
+        if(!ans.empty() && ans.back() == ' ')
+            ans.pop_back();
+
+        return ans;
+    }
+};
+            ans += words[i];
+            if(i) ans += " ";
+        }
+
+        return ans;
+    }
+};
+
+
+Optimal-
