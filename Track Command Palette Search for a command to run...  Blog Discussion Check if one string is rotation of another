@@ -1,0 +1,69 @@
+// ------------------------- Brute Force Approach -------------------------
+// Time Complexity: O(n²)
+// Space Complexity: O(n)
+
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+
+        // Rotation is possible only if both strings have the same length
+        if (s.length() != goal.length())
+            return false;
+
+        // Store the original string
+        string temp = s;
+
+        // Generate every possible rotation
+        for (int i = 0; i < s.length(); i++) {
+
+            // Move the first character to the end
+            // Example:
+            // "abcd" -> "bcda"
+            temp = temp.substr(1) + temp[0];
+
+            // If the rotated string matches goal,
+            // then goal is a valid rotation
+            if (temp == goal)
+                return true;
+        }
+
+        // Handles the case where no rotation is needed
+        // Example: s = "abc", goal = "abc"
+        return s == goal;
+    }
+};
+
+
+
+// ------------------------- Optimal Approach -------------------------
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+
+class Solution {
+public:
+    bool rotateString(string s, string goal) {
+
+        // Rotation is possible only if both strings have the same length
+        if (s.length() != goal.length())
+            return false;
+
+        // Concatenate the string with itself
+        // Example:
+        // s = "abcd"
+        // doubled = "abcdabcd"
+        string doubled = s + s;
+
+        // Every rotation of 's' appears as a substring
+        // inside "s + s"
+        //
+        // "abcdabcd"
+        //  ├── "abcd"
+        //   ├── "bcda"
+        //    ├── "cdab"
+        //     ├── "dabc"
+        //
+        // If goal is found inside doubled,
+        // then goal is a valid rotation.
+        return doubled.find(goal) != string::npos;
+    }
+};
